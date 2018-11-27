@@ -1,0 +1,38 @@
+
+language: "en"
+pipeline:
+- name: "nlp_spacy"
+  model: "en"
+- name: "tokenizer_spacy"
+- name: "ner_spacy"
+- name: "ner_crf"
+- name: "ner_synonyms"
+- name: "intent_entity_featurizer_regex"
+- name: "intent_featurizer_count_vectors"
+- name: "intent_featurizer_ngrams"
+- name: "intent_classifier_tensorflow_embedding"
+  # nn architecture
+  "num_hidden_layers_a": 2
+  "hidden_layer_size_a": [256, 128]
+  "num_hidden_layers_b": 0
+  "hidden_layer_size_b": []
+  "batch_size": [64, 256]
+  "epochs": 400
+  # embedding parameters
+  "embed_dim": 20
+  "mu_pos": 0.8  # should be 0.0 < ... < 1.0 for 'cosine'
+  "mu_neg": -0.4  # should be -1.0 < ... < 1.0 for 'cosine'
+  "similarity_type": "cosine"  # string 'cosine' or 'inner'
+  "num_neg": 20
+  "use_max_sim_neg": true  # flag which loss function to use
+  # regularization
+  "C2": 0.002
+  "C_emb": 0.8
+  "droprate": 0.2
+  # flag if to tokenize intents
+  "intent_tokenization_flag": false
+  "intent_split_symbol": "_"
+  # visualization of accuracy
+  "evaluate_every_num_epochs": 10  # small values may hurt performance
+  "evaluate_on_num_examples": 1000  
+

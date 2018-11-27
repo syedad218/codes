@@ -1,0 +1,20 @@
+
+intents:
+  - greet
+  - Sales_one_line
+  - Structured_response
+
+actions:
+- utter_greet
+- utter_one_line_answer
+- utter_structured_answer
+
+templates:
+  utter_greet:
+  - text: " Hi! how can i help you "
+
+  utter_one_line_answer:
+  - text: " select sum(Total_Price) as SalesValue from df "
+
+  utter_structured_answer:
+  - text: " select ID, None, sum(Total_Price) as SalesValue from df group by None order by SalesValue DESC "
